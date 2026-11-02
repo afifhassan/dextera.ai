@@ -1,0 +1,80 @@
+A test that cannot fail is not a test. It is a demonstration with a score attached.
+
+Physical AI evaluation is difficult because the thing being tested is not only a model. It is a model, a robot, a task and an environment, and each one can change the result. A credible test makes those dependencies visible instead of averaging them away.
+
+## Start with the decision, not the metric
+
+The first question is not "which benchmark should we run?" It is "what decision is this test meant to support?"
+
+A team might need to decide whether a model can be released to a pilot, whether a new policy is better than the old one, or whether a claim is strong enough to put in front of a safety reviewer. Each decision needs different evidence and tolerates a different amount of uncertainty.
+
+Write the decision down before the test. It makes the rest of the design much harder to fake.
+
+## Define the reference
+
+A result only means something relative to a reference. For physical AI, the strongest reference is real work: held-out expert demonstrations with measured outcomes, gathered under conditions that match the claim.
+
+If the reference is simulation, say so. If it is a public benchmark, say which version and which subset. If it is a previous model, keep the old result available for a fair comparison. The reference is not a formality; it is the thing that gives the number meaning.
+
+## Make held-out data genuinely held out
+
+The easiest way to produce an impressive result is to test on data that influenced training. The easiest way to avoid that mistake is to separate the evaluation set before modelling begins, document how it was selected and keep it out of the training loop.
+
+Held-out real work is especially valuable because it can show the difference between a model that has learned the task and a model that has learned the recording conditions.
+
+## Write the failure criteria first
+
+A test plan should say what failure looks like before the run. That includes task failure, unsafe behaviour, unacceptable variability and results that fall outside the confidence band.
+
+It should also say what happens when a result is ambiguous. Will the test be repeated? Will the sample be expanded? Who decides? A clear rule prevents the result from being negotiated after the fact.
+
+## A small protocol example
+
+The exact protocol depends on the niche, but the structure of a defensible test is consistent:
+
+```yaml
+decision: "Is model A ready for a supervised pilot?"
+task: "Seat and secure a connector"
+reference:
+  source: "held-out expert demonstrations"
+  conditions: "same fixture, three material variants"
+  exclusions: "sessions missing an outcome label"
+measures:
+  - task_success
+  - contact_sequence_correct
+  - recovery_after_misalignment
+  - cycle_time
+failure_criteria:
+  - "unsafe contact"
+  - "success below the agreed lower bound"
+  - "regression on any prior passing case"
+repeat:
+  runs: 3
+  report: "median and spread"
+```
+
+This is not a product configuration. It is a way of writing down what will count before anyone sees the result.
+
+## Compare like with like
+
+A comparison between models is only fair when the task, the reference data and the scoring are the same. That sounds obvious, but it is easy to lose in practice: one model may have seen more of the test conditions, another may have been tuned on a different robot, a third may have been evaluated with a more forgiving outcome label.
+
+A useful comparison report shows the shared conditions explicitly. It also shows where a difference could be explained by something other than the model.
+
+## Keep a regression baseline
+
+A model that improves on the headline task can get worse somewhere else. Regression checks catch that by running the same benchmark again after a change and comparing against a stored baseline.
+
+The baseline should be versioned along with the evidence. When a result moves, the team should be able to see what moved, by how much and under which conditions.
+
+## Report the limits
+
+A test report should end with what the evidence does not show. Which conditions were not represented? Which failure modes were not exercised? Which claims would need a different test?
+
+For safety and compliance reviews, this matters. Daxtera provides test evidence that supports those reviews. Daxtera does not certify robots and does not hold an accreditation. A report is evidence, not a certificate.
+
+## The test is part of the loop
+
+The most useful test is not the one that produces the highest number. It is the one that tells the team what to do next. A failure analysis that points to a missing condition, a weak contact model or an unrepresented material is more valuable than a pass that cannot explain itself.
+
+That is why testing belongs inside the Daxtera Loop: capture real work, calibrate simulation against it, train, test against held-out reality, and let the failures decide the next capture. A test that closes that loop is worth more than a leaderboard position.

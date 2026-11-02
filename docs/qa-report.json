@@ -1,0 +1,348 @@
+{
+  "base": "http://127.0.0.1:3100",
+  "pages": [
+    {
+      "name": "home",
+      "title": "Ground truth for physical AI",
+      "description": "Daxtera supplies verified real-world data, calibrated simulation and independent testing for physical AI, built niche by niche from the work of real experts.",
+      "h1": ["Ground truth for physical AI."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "height": 9565,
+      "canvases": 0,
+      "status": 200,
+      "consoleErrors": []
+    },
+    {
+      "name": "services",
+      "title": "Our services — Daxtera",
+      "description": "Real-world physical data, a calibrated simulator and independent testing — three services that reinforce each other for physical AI.",
+      "h1": ["Three services. One loop."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "height": 2690,
+      "canvases": 0,
+      "status": 200,
+      "consoleErrors": []
+    },
+    {
+      "name": "real-world-data",
+      "title": "Real-world physical data for physical AI — Daxtera",
+      "description": "Verified, model-ready datasets of real expert work. Custom capture programs or niche catalog datasets, delivered with documentation, consent and rights records.",
+      "h1": ["Datasets built from work that actually happened."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "height": 5235,
+      "canvases": 0,
+      "status": 200,
+      "consoleErrors": []
+    },
+    {
+      "name": "calibrated-simulator",
+      "title": "Calibrated simulator for physical AI — Daxtera",
+      "description": "Niche-specific digital environments tuned to real measurements from Daxtera capture. Train, fine-tune and stress-test physical AI without hardware time for every experiment.",
+      "h1": ["A simulator that has met the real world."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "height": 5059,
+      "canvases": 0,
+      "status": 200,
+      "consoleErrors": []
+    },
+    {
+      "name": "testing-and-comparison",
+      "title": "Physical AI testing and comparison — Daxtera",
+      "description": "Benchmark suites, comparison against real-world references and failure analysis for physical AI. Evidence you can repeat, export and use in safety and compliance reviews.",
+      "h1": ["Proof that holds up outside the demo."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "height": 5089,
+      "canvases": 0,
+      "status": 200,
+      "consoleErrors": []
+    },
+    {
+      "name": "vision",
+      "title": "Our vision — Daxtera",
+      "description": "A physical world machines can learn from. Real work, measured simulation and tests that show what a system can do.",
+      "h1": ["A physical world machines can learn from."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "height": 5559,
+      "canvases": 0,
+      "status": 200,
+      "consoleErrors": []
+    },
+    {
+      "name": "about",
+      "title": "About us — Daxtera",
+      "description": "Daxtera builds verified real-world data, calibrated simulation and independent testing for physical AI, niche by niche.",
+      "h1": ["A company built around what can be proved."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "height": 4937,
+      "canvases": 0,
+      "status": 200,
+      "consoleErrors": []
+    },
+    {
+      "name": "careers",
+      "title": "Careers — Daxtera",
+      "description": "Work on the data physical AI depends on. Roles for domain experts, capture specialists, annotators and engineers.",
+      "h1": ["Work on the data physical AI depends on."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "height": 3168,
+      "canvases": 0,
+      "status": 200,
+      "consoleErrors": []
+    },
+    {
+      "name": "blog",
+      "title": "Blog — Daxtera",
+      "description": "Notes from Daxtera on real-world data, measured simulation fidelity and physical AI testing.",
+      "h1": ["Notes on ground truth."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "height": 2103,
+      "canvases": 0,
+      "status": 200,
+      "consoleErrors": []
+    },
+    {
+      "name": "blog-post",
+      "title": "Why simulation fidelity should be measured, not claimed — Daxtera",
+      "description": "Every simulator is accurate somewhere and wrong somewhere else. The useful question is not whether it looks real, but how closely it matches the measurements that matter for your task.",
+      "h1": ["Why simulation fidelity should be measured, not claimed"],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "height": 4884,
+      "canvases": 0,
+      "status": 200,
+      "consoleErrors": []
+    },
+    {
+      "name": "home-mobile",
+      "title": "Ground truth for physical AI",
+      "description": "Daxtera supplies verified real-world data, calibrated simulation and independent testing for physical AI, built niche by niche from the work of real experts.",
+      "h1": ["Ground truth for physical AI."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "height": 13505,
+      "canvases": 0
+    },
+    {
+      "name": "services-mobile",
+      "title": "Our services — Daxtera",
+      "description": "Real-world physical data, a calibrated simulator and independent testing — three services that reinforce each other for physical AI.",
+      "h1": ["Three services. One loop."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "height": 4619,
+      "canvases": 0
+    },
+    {
+      "name": "real-world-data-mobile",
+      "title": "Real-world physical data for physical AI — Daxtera",
+      "description": "Verified, model-ready datasets of real expert work. Custom capture programs or niche catalog datasets, delivered with documentation, consent and rights records.",
+      "h1": ["Datasets built from work that actually happened."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "height": 8731,
+      "canvases": 0
+    },
+    {
+      "name": "calibrated-simulator-mobile",
+      "title": "Calibrated simulator for physical AI — Daxtera",
+      "description": "Niche-specific digital environments tuned to real measurements from Daxtera capture. Train, fine-tune and stress-test physical AI without hardware time for every experiment.",
+      "h1": ["A simulator that has met the real world."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "height": 8243,
+      "canvases": 0
+    },
+    {
+      "name": "testing-and-comparison-mobile",
+      "title": "Physical AI testing and comparison — Daxtera",
+      "description": "Benchmark suites, comparison against real-world references and failure analysis for physical AI. Evidence you can repeat, export and use in safety and compliance reviews.",
+      "h1": ["Proof that holds up outside the demo."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "height": 8351,
+      "canvases": 0
+    },
+    {
+      "name": "vision-mobile",
+      "title": "Our vision — Daxtera",
+      "description": "A physical world machines can learn from. Real work, measured simulation and tests that show what a system can do.",
+      "h1": ["A physical world machines can learn from."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "height": 6508,
+      "canvases": 0
+    },
+    {
+      "name": "about-mobile",
+      "title": "About us — Daxtera",
+      "description": "Daxtera builds verified real-world data, calibrated simulation and independent testing for physical AI, niche by niche.",
+      "h1": ["A company built around what can be proved."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "height": 8895,
+      "canvases": 0
+    },
+    {
+      "name": "careers-mobile",
+      "title": "Careers — Daxtera",
+      "description": "Work on the data physical AI depends on. Roles for domain experts, capture specialists, annotators and engineers.",
+      "h1": ["Work on the data physical AI depends on."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "height": 5407,
+      "canvases": 0
+    },
+    {
+      "name": "blog-mobile",
+      "title": "Blog — Daxtera",
+      "description": "Notes from Daxtera on real-world data, measured simulation fidelity and physical AI testing.",
+      "h1": ["Notes on ground truth."],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "height": 3365,
+      "canvases": 0
+    },
+    {
+      "name": "blog-post-mobile",
+      "title": "Why simulation fidelity should be measured, not claimed — Daxtera",
+      "description": "Every simulator is accurate somewhere and wrong somewhere else. The useful question is not whether it looks real, but how closely it matches the measurements that matter for your task.",
+      "h1": ["Why simulation fidelity should be measured, not claimed"],
+      "imagesMissingAlt": 0,
+      "emptyLinks": 0,
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "height": 6861,
+      "canvases": 0
+    }
+  ],
+  "a11y": [
+    {
+      "name": "home",
+      "violations": []
+    },
+    {
+      "name": "services",
+      "violations": []
+    },
+    {
+      "name": "real-world-data",
+      "violations": []
+    },
+    {
+      "name": "calibrated-simulator",
+      "violations": []
+    },
+    {
+      "name": "testing-and-comparison",
+      "violations": []
+    },
+    {
+      "name": "vision",
+      "violations": []
+    },
+    {
+      "name": "about",
+      "violations": []
+    },
+    {
+      "name": "careers",
+      "violations": []
+    },
+    {
+      "name": "blog",
+      "violations": []
+    },
+    {
+      "name": "blog-post",
+      "violations": []
+    }
+  ],
+  "visual": {
+    "hero": {
+      "canvas": 2,
+      "webgl": true
+    }
+  },
+  "performance": {
+    "profile": "Chrome headless, 390x844, 4x CPU throttle, 1.6 Mbps / 150 ms RTT",
+    "wallClockLoadMs": 5832,
+    "lcp": 1364,
+    "lcpElement": "H1",
+    "cls": 0,
+    "tbt": 574,
+    "longTasks": 3,
+    "transferKb": 408,
+    "domContentLoaded": 646,
+    "loadEvent": 2315,
+    "resourceCount": 21,
+    "approxInp": 24,
+    "interactions": 3
+  }
+}

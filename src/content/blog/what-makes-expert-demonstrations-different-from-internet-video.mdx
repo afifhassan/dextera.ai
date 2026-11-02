@@ -1,0 +1,52 @@
+A video is a record of appearance. A demonstration is a record of an attempt: what was done, under what conditions, with what result, and what happened when it did not go to plan.
+
+That difference matters for physical AI. Robots do not only need to recognise a scene. They need to act in it, and action depends on information a camera alone cannot provide — how firmly a tool is held, how a surface resists, how long a process takes, what a good outcome looks like and what a failure feels like before it becomes visible.
+
+## The internet is full of outcomes, not ground truth
+
+Internet video is an extraordinary resource. It contains an enormous range of places, objects and people. But it was made for people to watch, not for a model to learn a physical task from.
+
+The gaps are structural:
+
+- **Timing is editorial.** Cuts and compression remove the continuity that a robot must learn.
+- **Contact is invisible.** The moment a tool meets material is often the most important moment, and it is usually the least measurable.
+- **The outcome is missing.** A clip may end before the work does, or show a polished result without the failed attempts that produced it.
+- **Rights are unclear.** A model trained on video needs a defensible answer about where the data came from and what it may be used for.
+- **The person is not verified.** Skill is assumed from the edit, not established before the work begins.
+
+None of this makes internet video useless. It makes it insufficient as ground truth.
+
+## A demonstration is built around the task
+
+A useful expert demonstration starts with a task definition. What counts as success? Which variations matter? Which failure modes should a model learn to recognise and recover from? Those questions belong before capture, not after.
+
+Then the work is done by someone who can actually do it. Daxtera verifies identity, credentials or licences where the trade requires them, work history and practical skill before an expert is onboarded. Experts are skill-graded, certified on the protocol for their niche and audited over time. A trained capture specialist works alongside them.
+
+The result is not simply footage. It is a record of skilled work with the context needed to turn it into examples: the phases and steps, the contact events, the outcome and quality of the work, the failures and recoveries, and the moments that matter to a safety review.
+
+## The details that change a model
+
+Ask a maker to tighten a fitting and the visible motion is only part of the skill. The force applied, the give in the material, the sound of the tool and the point at which the maker decides to stop all carry information.
+
+A model trained only on appearance can learn a gesture that looks right. A model trained on measured work can learn what the gesture has to achieve.
+
+That is why Daxtera captures across signals — vision, motion, touch and force, sound and environment — and organises them into actions a model can use. The point is not more data for its own sake. The point is the part of the work that a video leaves out.
+
+## Consent is part of the data
+
+Expert demonstrations are made by people. That creates obligations that a web scrape never has to face.
+
+Daxtera obtains written consent from every worker and, where needed, the site owner. Ownership and licensing terms are explicit, with exclusive options. Anonymization is the default, chain of custody is documented, and each dataset carries a provenance file a buyer's legal team can audit.
+
+A demonstration that cannot be used legally is not a dataset. It is a liability with good production values.
+
+## What to look for in a demonstration dataset
+
+If you are evaluating real-world data, ask four questions:
+
+1. **Who did the work, and how was their skill verified?**
+2. **What was measured beyond the picture?**
+3. **What happened when the work failed, and is that included?**
+4. **What rights travel with the data?**
+
+The answers distinguish a demonstration from a video. They also determine whether a model trained on it has a chance of working outside the room where it was recorded.

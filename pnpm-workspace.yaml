@@ -1,0 +1,5 @@
+nodeLinker: hoisted
+shamefullyHoist: true
+allowBuilds:
+  sharp: false
+  unrs-resolver: false

@@ -1,0 +1,60 @@
+A simulator can look convincing and still teach the wrong lesson. The lighting is right, the materials read well, the robot moves plausibly — and then a contact behaves differently from the real world. For a team training a physical AI system, that gap is the whole question.
+
+Fidelity is not a quality that a simulator has in general. It is a relationship between a simulator and a task. A scene that is faithful enough to plan a pick-and-place sequence may be nowhere near faithful enough to tune a grip on a soft object. Saying a simulator is "realistic" hides the part that matters: realistic for what, and measured against what?
+
+## Fidelity needs a reference
+
+A measurement needs something to measure against. For physical AI, the reference should be real work: the same task, the same materials, the same conditions, recorded and documented well enough to compare.
+
+That comparison is not a single score. It is a set of questions:
+
+- Does the simulated motion follow the real motion in the places that affect the outcome?
+- Do contact events happen at the right point, with the right resistance and duration?
+- Do soft or flexible materials deform in a way that changes the decision?
+- Does the model see the same consequences when it makes the same mistake?
+
+Each question has a scope. A report that answers them can support a decision. A screenshot cannot.
+
+<figure>
+  <img
+    src="/blog/fidelity-plot.png"
+    alt="An illustrative chart showing a real-world reference line and a simulated line falling inside a confidence band."
+    loading="lazy"
+  />
+  <figcaption>
+    Illustrative diagram only. A measured fidelity report names the task, the
+    reference and the conditions behind each claim.
+  </figcaption>
+</figure>
+
+## Measured is not the same as perfect
+
+No simulator will be a perfect copy of reality. Contact is hard. Soft materials are hard. Dust, wear, temperature and the small variations that make a real workplace real are hard.
+
+The honest claim is narrower and more useful: here is how closely this environment matches real measurements for this task, here is where the gaps are, and here is what the evidence can support. That is measured, documented fidelity. It gives an engineer a way to decide when to trust the simulator and when to return to the real thing.
+
+A claim without those limits asks for trust it has not earned.
+
+## What a measured claim should contain
+
+A useful fidelity document makes five things easy to find:
+
+1. **The task and the scope.** Which behaviour the environment was built to represent, and which decisions it is meant to support.
+2. **The reference.** What real work the environment was compared against, and how that work was recorded and selected.
+3. **The measured behaviours.** The specific properties that were compared — motion, contact, deformation, timing or outcome.
+4. **The gaps.** Where the environment diverges, how much it diverges and under which conditions.
+5. **The conclusion.** What the evidence supports, and what it does not.
+
+None of those five items requires a perfect simulator. All five require a team willing to show its work.
+
+## Why this matters commercially
+
+Physical AI teams use simulation to move faster and spend less time on hardware. That is a reasonable trade, but it only works if the team knows what it is trading. A simulator that is treated as ground truth when it is not will produce confident, expensive mistakes.
+
+A measured fidelity document changes the conversation from "do you trust the simulator?" to "what has the simulator been shown to do?" That is a question a technical reviewer, a buyer or a safety reviewer can actually work with.
+
+## A better question
+
+Instead of asking whether a simulation is realistic, ask what decision it needs to support and what evidence exists that it can. If the answer is "none yet", that is not a reason to abandon simulation. It is a reason to measure it.
+
+Daxtera builds niche simulation environments and calibrates them against real measurements from real expert work. We do not claim a perfect copy of reality. We show how close the environment is, where it is not, and what that means for the task in front of you.
