@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { ContactDrift } from "@/components/home/ContactDrift";
+import { TreatedPhoto } from "@/components/media/TreatedPhoto";
 import { LoopDiagram } from "@/components/services/LoopDiagram";
 import { about } from "@/lib/data/about";
 import { site } from "@/lib/data/site";
@@ -105,6 +106,18 @@ export default function AboutPage() {
                 <span aria-hidden="true">↺</span>
                 {about.howWeWork.loop}
               </div>
+              <div className="relative mt-8 aspect-[16/10] overflow-hidden rounded-[12px] border border-bench/12">
+                <TreatedPhoto
+                  src="/photos/collaborative-bench.webp"
+                  alt="Two engineers working at a modular perforated assembly bench."
+                  sizes="(max-width: 1024px) 90vw, 30vw"
+                  className="absolute inset-0"
+                  imageClassName="object-[55%_center]"
+                />
+                <span className="absolute inset-x-3 bottom-2.5 font-mono text-[7px] uppercase tracking-[0.16em] text-bench/85">
+                  Operating model / capture bench
+                </span>
+              </div>
               <div className="mt-8 [&_figure]:max-w-[430px]">
                 <LoopDiagram compact />
               </div>
@@ -162,6 +175,18 @@ export default function AboutPage() {
               <p className="mt-5 max-w-sm text-[13px] leading-[1.75] text-steel">
                 {about.trust.intro}
               </p>
+              <div className="relative mt-7 aspect-[4/3] overflow-hidden rounded-[12px] border border-steel/15">
+                <TreatedPhoto
+                  src="/photos/field-verification.webp"
+                  alt="Technicians in hard hats verifying a robot effector on the line."
+                  sizes="(max-width: 1024px) 90vw, 28vw"
+                  className="absolute inset-0"
+                  imageClassName="object-[58%_center]"
+                />
+                <span className="absolute inset-x-3 bottom-2.5 font-mono text-[7px] uppercase tracking-[0.16em] text-bench/85">
+                  Field verification / signed off on site
+                </span>
+              </div>
             </div>
             <div className="lg:col-span-8">
               <div className="grid grid-cols-1 gap-x-10 gap-y-0 sm:grid-cols-2">

@@ -17,16 +17,16 @@ const visualMap: Record<string, ServiceVisual> = {
 
 const photoMap: Record<string, { src: string; alt: string }> = {
   "real-world-data": {
-    src: "/photos/precision-work.webp",
-    alt: "An expert aligning a cable connector on a precision press.",
+    src: "/photos/connector-harness.webp",
+    alt: "A technician wiring circular connectors on a press, with telemetry running alongside.",
   },
   "calibrated-simulator": {
-    src: "/photos/expert-work-wide.webp",
-    alt: "An expert using a precision tool at a bench of machined components.",
+    src: "/photos/cad-workstation.webp",
+    alt: "A CAD workstation beside the physical bench it is calibrated against.",
   },
   "testing-and-comparison": {
-    src: "/photos/gripper-test.webp",
-    alt: "A robotic gripper holding a small object during a controlled test.",
+    src: "/photos/aoi-inspection.webp",
+    alt: "A conveyor inspection camera checking connector assemblies against a defect model.",
   },
 };
 

@@ -59,12 +59,14 @@ export function Scene3D({
       hasWebGL = false;
     }
 
-    const frame = requestAnimationFrame(() => {
+    // A timer rather than rAF: the deferred init must also run when the page
+    // is opened in a background tab, where animation frames are suspended.
+    const timer = window.setTimeout(() => {
       setDprCap([1, window.innerWidth < 768 ? 1.5 : 2]);
       if (!reduce && wideEnough && hasWebGL && !lowPower) setEnabled(true);
-    });
+    }, 0);
 
-    return () => cancelAnimationFrame(frame);
+    return () => window.clearTimeout(timer);
   }, [minWidth]);
 
   useEffect(() => {
@@ -88,11 +90,14 @@ export function Scene3D({
   }, [enabled]);
 
   const frameloop = inView && visible ? "always" : "never";
+  // Callers that fill their parent pass `absolute inset-0`. Keeping `relative`
+  // in the base classes would win the cascade and collapse the wrapper to 0 px.
+  const positioned = className ? /\b(absolute|fixed|sticky)\b/.test(className) : false;
 
   return (
     <div
       ref={wrapRef}
-      className={cn("relative isolate", className)}
+      className={cn(positioned ? "isolate" : "relative isolate", className)}
       aria-hidden="true"
     >
       <div

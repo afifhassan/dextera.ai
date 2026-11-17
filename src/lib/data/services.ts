@@ -62,9 +62,9 @@ export const services: Service[] = [
       "Verified, model-ready datasets of real expert work. Custom capture programs or niche catalog datasets, delivered with documentation, consent and rights records.",
     visual: "dataset",
     visualLabel: "Episodes assembling into a verified dataset",
-    photo: "/photos/precision-work.webp",
+    photo: "/photos/connector-harness.webp",
     photoAlt:
-      "An expert's hands aligning a cable connector on a precision press.",
+      "A technician wiring circular connectors on a press, telemetry running alongside.",
     eyebrow: "Service 01 — Real-world data",
     headline: "Datasets built from work that actually happened.",
     promise:
@@ -185,9 +185,9 @@ export const services: Service[] = [
       "Niche-specific digital environments tuned to real measurements from Daxtera capture. Train, fine-tune and stress-test physical AI without hardware time for every experiment.",
     visual: "simulator",
     visualLabel: "A workcell assembling from scan to calibrated scene",
-    photo: "/photos/expert-work-wide.webp",
+    photo: "/photos/sim-to-real-twin.webp",
     photoAlt:
-      "An expert working with a precision tool at a bench of machined components.",
+      "A robot cell in CAD simulation beside the physical production line it is calibrated against.",
     eyebrow: "Service 02 — Calibrated simulator",
     headline: "A simulator that has met the real world.",
     promise:
@@ -294,9 +294,9 @@ export const services: Service[] = [
       "Benchmark suites, comparison against real-world references and failure analysis for physical AI. Evidence you can repeat, export and use in safety and compliance reviews.",
     visual: "benchmark",
     visualLabel: "A benchmark curve closing on the real-world reference",
-    photo: "/photos/gripper-test.webp",
+    photo: "/photos/aoi-inspection.webp",
     photoAlt:
-      "A robotic gripper holding a small object during a controlled test.",
+      "A conveyor inspection camera checking connector assemblies with pass and fail results.",
     eyebrow: "Service 03 — Testing and comparison",
     headline: "Proof that holds up outside the demo.",
     promise:

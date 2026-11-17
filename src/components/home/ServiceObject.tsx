@@ -1,10 +1,27 @@
+import { palette } from "@/lib/palette";
 import type { ServiceVisual } from "@/lib/data/services";
 
+const mono = {
+  fontFamily: "var(--font-geist-mono), monospace",
+} as const;
+
+const PANELS = [
+  { x: 20, label: "POINT CLOUD" },
+  { x: 144, label: "CALIBRATED MESH" },
+  { x: 268, label: "TESTED BENCHMARK" },
+];
+const PANEL_W = 112;
+const PANEL_Y = 46;
+const PANEL_H = 132;
+
 /**
- * Small procedural objects for the service cards. Abstract on purpose:
- * point cloud, digital twin and benchmark, never hardware.
+ * Compact triptych preview on each service card: point cloud → calibrated mesh
+ * → tested benchmark. The card's own stage is the lit panel; the other two stay
+ * legible but quiet, so the three services read as one pipeline.
  */
 export function ServiceObject({ variant }: { variant: ServiceVisual }) {
+  const activeIndex = variant === "dataset" ? 0 : variant === "simulator" ? 1 : 2;
+
   return (
     <svg
       viewBox="0 0 400 240"
@@ -12,217 +29,260 @@ export function ServiceObject({ variant }: { variant: ServiceVisual }) {
       aria-hidden="true"
     >
       <defs>
-        <linearGradient id={`object-fade-${variant}`} x1="0" x2="1">
-          <stop offset="0%" stopColor="#EEF1F4" stopOpacity="0.02" />
-          <stop offset="100%" stopColor="#EEF1F4" stopOpacity="0.1" />
+        <linearGradient id="triptych-fade" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor={palette.bench} stopOpacity="0.06" />
+          <stop offset="100%" stopColor={palette.bench} stopOpacity="0" />
         </linearGradient>
       </defs>
 
-      {variant === "dataset" ? <DatasetObject /> : null}
-      {variant === "simulator" ? <SimulatorObject /> : null}
-      {variant === "benchmark" ? <BenchmarkObject /> : null}
+      <text
+        x="20"
+        y="30"
+        fill={palette.bench}
+        fillOpacity="0.55"
+        {...mono}
+        fontSize="6.5"
+        letterSpacing="1.6"
+      >
+        POINT CLOUD → MESH → BENCHMARK
+      </text>
+
+      {PANELS.map((panel, index) => {
+        const active = index === activeIndex;
+        const colour = active ? palette.trace : palette.bench;
+        return (
+          <g key={panel.label}>
+            <rect
+              x={panel.x}
+              y={PANEL_Y}
+              width={PANEL_W}
+              height={PANEL_H}
+              rx="4"
+              fill={active ? palette.trace : palette.bench}
+              fillOpacity={active ? 0.05 : 0.015}
+              stroke={colour}
+              strokeOpacity={active ? 0.7 : 0.2}
+            />
+            <path
+              d={`M${panel.x + 6} ${PANEL_Y + 6}h11M${panel.x + 6} ${PANEL_Y + 6}v11`}
+              stroke={colour}
+              strokeOpacity={active ? 0.8 : 0.35}
+            />
+            <path
+              d={`M${panel.x + PANEL_W - 6} ${PANEL_Y + PANEL_H - 6}h-11M${panel.x + PANEL_W - 6} ${PANEL_Y + PANEL_H - 6}v-11`}
+              stroke={colour}
+              strokeOpacity={active ? 0.8 : 0.35}
+            />
+            <text
+              x={panel.x + 4}
+              y={PANEL_Y + PANEL_H + 16}
+              fill={active ? palette.trace : palette.bench}
+              fillOpacity={active ? 1 : 0.4}
+              {...mono}
+              fontSize="6"
+              letterSpacing="1.1"
+            >
+              {panel.label}
+            </text>
+            <text
+              x={panel.x + 4}
+              y={PANEL_Y + PANEL_H + 27}
+              fill={palette.bench}
+              fillOpacity={active ? 0.55 : 0.22}
+              {...mono}
+              fontSize="5.5"
+              letterSpacing="1"
+            >
+              0{index + 1}
+            </text>
+
+            {index === 0 ? <PointCloudMarks active={active} /> : null}
+            {index === 1 ? <MeshMarks active={active} /> : null}
+            {index === 2 ? <BenchmarkMarks active={active} /> : null}
+
+            {active ? (
+              <g>
+                <rect
+                  x={panel.x + PANEL_W - 22}
+                  y={PANEL_Y + 6}
+                  width="16"
+                  height="8"
+                  rx="2"
+                  fill={palette.trace}
+                  fillOpacity="0.9"
+                />
+                <text
+                  x={panel.x + PANEL_W - 14}
+                  y={PANEL_Y + 12}
+                  textAnchor="middle"
+                  fill={palette.ink}
+                  {...mono}
+                  fontSize="4.6"
+                  letterSpacing="0.8"
+                >
+                  LIVE
+                </text>
+              </g>
+            ) : null}
+          </g>
+        );
+      })}
     </svg>
   );
 }
 
-function DatasetObject() {
-  const cells = Array.from({ length: 30 }, (_, index) => {
-    const column = index % 10;
-    const row = Math.floor(index / 10);
-    return {
-      x: 108 + column * 19,
-      y: 92 + row * 19,
-      flagged: index === 13,
-      dim: index > 23,
-    };
-  });
-
+function PointCloudMarks({ active }: { active: boolean }) {
+  const cx = 76;
+  const cy = 112;
   return (
     <g>
-      <ellipse
-        cx="200"
-        cy="160"
-        rx="130"
-        ry="62"
-        fill="url(#object-fade-dataset)"
-      />
-      {cells.map((cell, index) => (
-        <g key={index}>
-          <rect
-            x={cell.x}
-            y={cell.y}
-            width="14"
-            height="14"
-            rx="2"
-            fill={cell.flagged ? "#F0A12B" : "#EEF1F4"}
-            fillOpacity={cell.dim ? 0.1 : cell.flagged ? 0.2 : 0.16}
-            stroke={cell.flagged ? "#F0A12B" : "#EEF1F4"}
-            strokeOpacity={cell.dim ? 0.24 : cell.flagged ? 0.86 : 0.68}
+      {Array.from({ length: 46 }, (_, index) => {
+        const angle = (index * 137.5 * Math.PI) / 180;
+        const radius = 8 + ((index * 11) % 38);
+        const x = cx + Math.cos(angle) * radius;
+        const y = cy + Math.sin(angle) * radius * 0.72 - (index % 5) * 1.6;
+        return (
+          <circle
+            key={index}
+            cx={x.toFixed(1)}
+            cy={y.toFixed(1)}
+            r={index % 7 === 0 ? 1.5 : 0.9}
+            fill={active ? palette.trace : palette.bench}
+            opacity={active ? 0.55 + (index % 4) * 0.1 : 0.32}
           />
-          {index === 13 ? <path d="M196 88l3 7h-6z" fill="#F0A12B" /> : null}
-        </g>
-      ))}
-      <path
-        d="M86 188 C136 202 264 202 316 184"
+        );
+      })}
+      <ellipse
+        cx={cx}
+        cy={cy + 26}
+        rx="42"
+        ry="10"
         fill="none"
-        stroke="#EEF1F4"
-        strokeOpacity="0.25"
-        strokeDasharray="3 7"
+        stroke={active ? palette.trace : palette.bench}
+        strokeOpacity={active ? 0.35 : 0.14}
+        strokeDasharray="2 4"
       />
-      <g transform="translate(286 62)">
-        <circle r="22" fill="#A55704" stroke="#EEF1F4" strokeOpacity="0.45" />
-        <path
-          d="M-7 1l5 5 9-11"
-          fill="none"
-          stroke="#EEF1F4"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
       <text
-        x="96"
-        y="62"
-        fill="#EEF1F4"
-        fillOpacity="0.7"
-        fontFamily="var(--font-geist-mono), monospace"
-        fontSize="8"
-        letterSpacing="1.6"
+        x="26"
+        y="76"
+        fill={palette.bench}
+        fillOpacity={active ? 0.6 : 0.3}
+        {...mono}
+        fontSize="5"
+        letterSpacing="1"
       >
-        EPISODES → DATASET
+        1.2 M PTS
       </text>
     </g>
   );
 }
 
-function SimulatorObject() {
+function MeshMarks({ active }: { active: boolean }) {
+  const colour = active ? palette.trace : palette.bench;
   return (
     <g>
-      <ellipse
-        cx="208"
-        cy="170"
-        rx="130"
-        ry="54"
-        fill="url(#object-fade-simulator)"
+      <path
+        d="M154 146 L196 124 L242 138 L202 160 Z"
+        fill={active ? palette.trace : palette.bench}
+        fillOpacity="0.05"
+        stroke={colour}
+        strokeOpacity={active ? 0.85 : 0.35}
       />
       <path
-        d="M108 178 L176 106 L294 106 L232 188 Z"
+        d="M196 124V82 L242 96V138M154 146V108 L196 82 M202 160V122 L242 138"
         fill="none"
-        stroke="#EEF1F4"
-        strokeOpacity="0.6"
+        stroke={colour}
+        strokeOpacity={active ? 0.6 : 0.26}
       />
+      {[0, 1, 2, 3].map((index) => (
+        <line
+          key={`v-${index}`}
+          x1={196 + index * 11.5}
+          y1={124 - index * 7}
+          x2={196 + index * 11.5}
+          y2={82 - index * 7}
+          stroke={colour}
+          strokeOpacity={active ? 0.3 : 0.14}
+        />
+      ))}
+      {[0, 1, 2].map((index) => (
+        <line
+          key={`d-${index}`}
+          x1={154 + index * 14}
+          y1={146 - index * 12}
+          x2={196 + index * 14}
+          y2={124 - index * 14}
+          stroke={colour}
+          strokeOpacity={active ? 0.24 : 0.12}
+        />
+      ))}
+      <circle cx="221" cy="128" r="2.4" fill={active ? palette.amber : palette.bench} />
+      <text
+        x="154"
+        y="176"
+        fill={palette.bench}
+        fillOpacity={active ? 0.6 : 0.3}
+        {...mono}
+        fontSize="5"
+        letterSpacing="1"
+      >
+        Δ 0.7 mm
+      </text>
+    </g>
+  );
+}
+
+function BenchmarkMarks({ active }: { active: boolean }) {
+  const colour = active ? palette.trace : palette.bench;
+  return (
+    <g>
       <path
-        d="M176 106V48L294 48V106M108 178V118L176 48M232 188V126L294 106"
-        fill="none"
-        stroke="#EEF1F4"
-        strokeOpacity="0.65"
-      />
-      <path
-        d="M132 138h154M132 116h154M146 178V106M248 178V106"
-        stroke="#EEF1F4"
-        strokeOpacity="0.2"
-        strokeDasharray="3 7"
+        d="M284 150h88M284 92h88"
+        stroke={colour}
+        strokeOpacity={active ? 0.35 : 0.16}
+        strokeDasharray="3 4"
       />
       <rect
-        x="216"
-        y="82"
-        width="42"
-        height="30"
-        rx="3"
-        fill="#EEF1F4"
-        fillOpacity="0.04"
-        stroke="#EEF1F4"
-        strokeOpacity="0.6"
-      />
-      <path d="M216 97h42M237 82v30" stroke="#EEF1F4" strokeOpacity="0.28" />
-      <circle cx="292" cy="142" r="4" fill="#F0A12B" />
-      <circle
-        cx="292"
-        cy="142"
-        r="14"
-        fill="none"
-        stroke="#F0A12B"
-        strokeOpacity="0.3"
-      />
-      <path d="M98 208h206" stroke="#EEF1F4" strokeOpacity="0.32" />
-      <text
-        x="102"
-        y="62"
-        fill="#EEF1F4"
-        fillOpacity="0.7"
-        fontFamily="var(--font-geist-mono), monospace"
-        fontSize="8"
-        letterSpacing="1.6"
-      >
-        MEASURED / CALIBRATED
-      </text>
-    </g>
-  );
-}
-
-function BenchmarkObject() {
-  return (
-    <g>
-      <ellipse
-        cx="200"
-        cy="158"
-        rx="124"
-        ry="58"
-        fill="url(#object-fade-benchmark)"
+        x="284"
+        y={active ? 112 : 116}
+        width="88"
+        height="26"
+        fill={colour}
+        fillOpacity={active ? 0.08 : 0.02}
       />
       <path
-        d="M110 166 A92 92 0 0 1 290 166"
+        d="M284 138 C304 128 312 108 330 104 C348 100 356 118 370 110"
         fill="none"
-        stroke="#EEF1F4"
-        strokeOpacity="0.58"
-        strokeWidth="6"
-        strokeLinecap="round"
-      />
-      <path
-        d="M122 166 A80 80 0 0 1 278 166"
-        fill="none"
-        stroke="#EEF1F4"
-        strokeOpacity="0.6"
-        strokeWidth="2"
-        strokeDasharray="3 7"
-      />
-      <path
-        d="M200 166 L256 102"
-        stroke="#EEF1F4"
-        strokeOpacity="0.55"
+        stroke={colour}
+        strokeOpacity={active ? 0.9 : 0.4}
         strokeWidth="1.2"
       />
-      <circle cx="200" cy="166" r="5" fill="#F0A12B" />
+      <path
+        d="M284 148 C306 138 316 120 334 116 C352 112 360 128 372 122"
+        fill="none"
+        stroke={palette.amber}
+        strokeOpacity={active ? 0.75 : 0.3}
+        strokeDasharray="2 3"
+      />
+      <circle cx="370" cy="110" r="2.6" fill={active ? palette.amber : palette.bench} />
       <circle
-        cx="200"
-        cy="166"
-        r="20"
+        cx="370"
+        cy="110"
+        r="7"
         fill="none"
-        stroke="#F0A12B"
-        strokeOpacity="0.25"
-      />
-      <path d="M116 196h168" stroke="#EEF1F4" strokeOpacity="0.35" />
-      <path
-        d="M142 196v8M200 196v11M258 196v8"
-        stroke="#EEF1F4"
-        strokeOpacity="0.55"
-      />
-      <path
-        d="M154 140 C190 124 232 132 258 152"
-        fill="none"
-        stroke="#EEF1F4"
-        strokeOpacity="0.42"
+        stroke={active ? palette.amber : palette.bench}
+        strokeOpacity={active ? 0.5 : 0.2}
       />
       <text
-        x="118"
-        y="62"
-        fill="#EEF1F4"
-        fillOpacity="0.7"
-        fontFamily="var(--font-geist-mono), monospace"
-        fontSize="8"
-        letterSpacing="1.6"
+        x="284"
+        y="170"
+        fill={palette.bench}
+        fillOpacity={active ? 0.6 : 0.3}
+        {...mono}
+        fontSize="5"
+        letterSpacing="1"
       >
-        SYSTEM / REFERENCE
+        PASS 3 / 3
       </text>
     </g>
   );

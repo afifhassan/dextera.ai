@@ -1,9 +1,76 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { TreatedPhoto } from "@/components/media/TreatedPhoto";
 import { vision } from "@/lib/data/vision";
 import { cn } from "@/lib/utils";
 import { palette } from "@/lib/palette";
+
+/** One wireframe kinematic chain per principle; the active stage lights it. */
+function KinematicChain({
+  index,
+  active,
+}: {
+  index: number;
+  active: number;
+}) {
+  const base = { x: 45, y: 54 };
+  const baseAngle = -Math.PI / 2 + (index - 2) * 0.17;
+  const shoulder = {
+    x: base.x + Math.cos(baseAngle) * 17,
+    y: base.y + Math.sin(baseAngle) * 17,
+  };
+  const elbowAngle = baseAngle + 0.62 + index * 0.05;
+  const elbow = {
+    x: shoulder.x + Math.cos(elbowAngle) * 14,
+    y: shoulder.y + Math.sin(elbowAngle) * 14,
+  };
+  const wristAngle = elbowAngle - 1.15;
+  const wrist = {
+    x: elbow.x + Math.cos(wristAngle) * 8,
+    y: elbow.y + Math.sin(wristAngle) * 8,
+  };
+
+  const live = index === active;
+  const colour = live ? palette.trace : palette.bench;
+  const opacity = live ? 0.95 : 0.28;
+
+  return (
+    <svg viewBox="0 0 90 62" className="h-auto w-full" aria-hidden="true">
+      <path
+        d={`M${base.x - 18} ${base.y}h36`}
+        stroke={colour}
+        strokeOpacity={opacity * 0.7}
+      />
+      <path
+        d={`M${base.x} ${base.y - 21}L${base.x} ${base.y}L${shoulder.x} ${shoulder.y}L${elbow.x} ${elbow.y}L${wrist.x} ${wrist.y}`}
+        fill="none"
+        stroke={colour}
+        strokeOpacity={opacity}
+        strokeWidth={live ? 1.4 : 1}
+        strokeLinecap="round"
+      />
+      {[shoulder, elbow, wrist].map((joint, jointIndex) => (
+        <circle
+          key={jointIndex}
+          cx={joint.x}
+          cy={joint.y}
+          r={live ? 2 : 1.6}
+          fill={live && jointIndex === 2 ? palette.amber : colour}
+          opacity={opacity}
+        />
+      ))}
+      <circle
+        cx={wrist.x}
+        cy={wrist.y}
+        r="5"
+        fill="none"
+        stroke={colour}
+        strokeOpacity={opacity * 0.4}
+      />
+    </svg>
+  );
+}
 
 export function VisionScroll() {
   const [active, setActive] = useState(0);
@@ -57,6 +124,18 @@ export function VisionScroll() {
       <div className="lg:col-span-6">
         <div className="lg:sticky lg:top-24">
           <div className="relative overflow-hidden rounded-[12px] border border-bench/12 bg-ink">
+            <TreatedPhoto
+              src="/photos/lab-screen-robot.webp"
+              alt="Engineers reviewing a three-dimensional robotic model on a lab display."
+              sizes="(max-width: 1024px) 92vw, 46vw"
+              className="absolute inset-0"
+              imageClassName="object-[58%_42%]"
+              overlay="light"
+            />
+            <div
+              className="pointer-events-none absolute inset-0 bg-ink/55"
+              aria-hidden="true"
+            />
             <div
               className="bg-grid-dark absolute inset-0 opacity-70"
               aria-hidden="true"
@@ -336,6 +415,72 @@ export function VisionScroll() {
                 </text>
               </g>
 
+              {/* Kinematic model projection: rotates and aligns per principle */}
+              <g
+                style={{
+                  transform: `rotate(${active * 9 - 18}deg) translateY(${active * -4}px)`,
+                  transformOrigin: "470px 486px",
+                  transition:
+                    "transform 900ms cubic-bezier(0.22, 1, 0.36, 1)",
+                }}
+              >
+                <g stroke={palette.bench} fill="none">
+                  <path
+                    d="M470 560 L470 512 L430 474 L458 442"
+                    strokeOpacity="0.55"
+                    strokeWidth="1.4"
+                  />
+                  <path
+                    d="M470 560 L496 560 M458 442 L474 424 M458 442 L438 430"
+                    strokeOpacity="0.4"
+                  />
+                  <path
+                    d="M416 500 L524 500 M416 520 L524 520"
+                    strokeOpacity="0.12"
+                    strokeDasharray="2 6"
+                  />
+                  {[
+                    [470, 512, 3],
+                    [430, 474, 2.6],
+                    [458, 442, 2.4],
+                  ].map(([cx, cy, r], index) => (
+                    <circle
+                      key={index}
+                      cx={cx}
+                      cy={cy}
+                      r={r}
+                      fill={palette.bench}
+                      fillOpacity="0.8"
+                      stroke="none"
+                    />
+                  ))}
+                  <circle
+                    cx="474"
+                    cy="424"
+                    r="5"
+                    fill="none"
+                    stroke={palette.amber}
+                    strokeOpacity="0.7"
+                  />
+                  <path
+                    d="M462 424h24M474 412v24"
+                    stroke={palette.amber}
+                    strokeOpacity="0.45"
+                  />
+                </g>
+                <text
+                  x="404"
+                  y="586"
+                  fill={palette.bench}
+                  fillOpacity="0.45"
+                  fontFamily="var(--font-geist-mono), monospace"
+                  fontSize="6.5"
+                  letterSpacing="1.6"
+                >
+                  KINEMATIC PROJECTION
+                </text>
+              </g>
+
               <path
                 d="M98 536h404"
                 stroke={palette.bench}
@@ -365,6 +510,37 @@ export function VisionScroll() {
               ))}
             </div>
           </div>
+
+          {/* Five kinematic chains, one per principle */}
+          <div className="mt-3 grid grid-cols-5 gap-1.5 sm:gap-2">
+            {vision.principles.map((principle, index) => (
+              <div
+                key={principle.index}
+                className={cn(
+                  "relative overflow-hidden rounded-md border bg-ink/[0.55] px-1.5 pb-1 pt-1.5 transition-colors duration-500",
+                  active === index
+                    ? "border-trace/45 bg-ink/[0.8]"
+                    : "border-bench/10",
+                )}
+              >
+                <span
+                  className={cn(
+                    "font-mono text-[6px] tracking-[0.14em] transition-colors duration-500",
+                    active === index ? "text-trace" : "text-bench/40",
+                  )}
+                >
+                  {principle.index}
+                </span>
+                <KinematicChain index={index} active={active} />
+              </div>
+            ))}
+          </div>
+          <p className="mt-2 flex items-center justify-between font-mono text-[6.5px] uppercase tracking-[0.16em] text-steel">
+            <span>Kinematic projections</span>
+            <span>
+              05 principles · stage 0{Math.min(active + 1, 4)}
+            </span>
+          </p>
         </div>
       </div>
 
